@@ -4,7 +4,9 @@ import java.awt.Image;
 public class Block extends Object {
 	int id;
 	int wallID = 1;
-	Image wallPic = imageLoad("Brick_white_wall.jpg");
+	int floorID = 0;
+
+	// Image wallPic = imageLoad("Brick_white_wall.jpg");
 
 	public Block(int x, int y, int height, int width, int id) {
 		// Block Constructor
@@ -18,15 +20,17 @@ public class Block extends Object {
 	public void draw(Graphics g) {
 		// Background and walls
 		if (id == wallID) {
-			g.drawImage(wallPic, x, y, height, width, null);
+			g.drawImage(BlcImages.wallPic, x, y, height, width, null);
+		} else if (id == floorID) {
+			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
 
 		}
 	}
 
 	public void drawLayer2(Graphics g) {
 		// Object(Interactive Stuff)
-		if (id == wallID) {
-			g.drawImage(wallPic, x, y, height, width, null);
+		if (id == floorID) {
+			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
 
 		}
 	}

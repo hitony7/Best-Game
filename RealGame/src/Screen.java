@@ -1,15 +1,20 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+
 
 public class Screen extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
 	public static boolean runGame = true;
+	public static boolean isFirst = true;
 
 	public static Frame frame;
 	public Thread thread = new Thread(this);
@@ -17,7 +22,8 @@ public class Screen extends JPanel implements Runnable {
 
 	public Player player;
 	public Room room;
-
+	public LevelLoad levelLoad;
+	
 	public Screen(Frame frame) {
 		frame.addKeyListener(new KeyMove(this));
 		frame.setSize(new Dimension(frame.getWidth(), frame.getHeight()));
@@ -60,13 +66,16 @@ public class Screen extends JPanel implements Runnable {
 	public void run() {
 		// Runs game loop
 		while (true) {
-			if (runGame) {
+			if(isFirst){
+				loadRoom("text.txt");
+				isFirst = false;
+			} else if (runGame) {
 				update(); // update
 				checkC(); // check collision
 				repaint(); // render
 			}
 			try {
-				thread.sleep(1000 / 60);// 1000/60 = 60fps
+				Thread.sleep(1000 / 60);// 1000/60 = 60fps
 			} catch (Exception e) {
 
 			}
@@ -75,10 +84,13 @@ public class Screen extends JPanel implements Runnable {
 
 	}
 
+	private void loadRoom(String path) {
+		//levelLoad.loadSave(new File(resources.Pic.class.getResource(path).getFile()));
+	}
+
 	private void update() {
 		player.bulletMove();
 		player.physic();
-
 	}
 
 }

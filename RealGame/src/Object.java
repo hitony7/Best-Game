@@ -39,7 +39,7 @@ public class Object extends JLabel {
 	}
 
 	// Loads Image
-	public BufferedImage imageLoad(String string) {
+	public static BufferedImage imageLoad(String string) {
 		BufferedImage image = null;
 		try {
 			URL imageURL = resources.Pic.class.getResource(string);
@@ -49,7 +49,6 @@ public class Object extends JLabel {
 		}
 		return image;
 	}
-
 	// Debug
 	public String toString() {
 		return "Current x,y:" + x + "," + y + " | Current height,width: "
