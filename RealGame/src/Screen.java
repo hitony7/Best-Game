@@ -59,7 +59,7 @@ public class Screen extends JPanel implements Runnable {
 		// Needs Double for loop x and y;
 		for (int i = 0; i < 5; i++) {
 			if (player.collison(room.blocks[0][0])) {
-				player.x = player.x - 1;
+				player.x = player.x;
 			}
 		}
 	}
@@ -68,7 +68,7 @@ public class Screen extends JPanel implements Runnable {
 		// Runs game loop
 		while (true) {
 			if (isFirst) {
-				loadRoom("text.txt");
+				loadRoom("test.txt");
 				isFirst = false;
 			} else if (runGame) {
 				update(); // update
@@ -86,10 +86,9 @@ public class Screen extends JPanel implements Runnable {
 	}
 
 	private void loadRoom(String path) {
-		URL url = Pic.class.getResource(path);
-		System.out.println(url == null);
-		// File file = new File (url);
-		// System.out.println(file.exists());
+		String url = Pic.class.getResource(path).getFile();
+		 File file = new File (url);
+		 levelLoad.loadSave(file);
 	}
 
 	private void update() {

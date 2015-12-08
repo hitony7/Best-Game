@@ -26,6 +26,13 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			screen.player.space = true;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_E) {
+			for (int i = 0; i < screen.room.blocks.length; i++) {
+				for (Block block : screen.room.blocks[i]) {
+					System.out.println(block.id);
+				}
+			}
+		}
 
 	}
 

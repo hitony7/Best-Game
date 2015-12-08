@@ -8,20 +8,20 @@ public class Block extends Object {
 
 	// Image wallPic = imageLoad("Brick_white_wall.jpg");
 
-	public Block(int x, int y, int height, int width, int id) {
+	public Block(int x, int y, int height, int width) {
 		// Block Constructor
 		this.x = x;
 		this.y = y;
 		this.height = height;
 		this.width = width;
-		this.id = id;
 	}
 
 	public void draw(Graphics g) {
 		// Background and walls
 		if (id == wallID) {
 			g.drawImage(BlcImages.wallPic, x, y, height, width, null);
-		} else if (id == floorID) {
+		} 
+		if (id == floorID) {
 			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
 
 		}

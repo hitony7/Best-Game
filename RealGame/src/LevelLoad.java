@@ -1,5 +1,6 @@
 import java.io.File;
 import java.net.URL;
+import java.util.Random;
 import java.util.Scanner;
 
 public class LevelLoad {
@@ -11,5 +12,12 @@ public class LevelLoad {
 
 	public void loadSave(File path) {
 		System.out.println("work");
+		try {
+			Scanner scanner = new Scanner(path);
+			
+			scanner.close();
+			System.out.println("fileloaded");
+		} catch (Exception e) {
+		}
 	}
 }
