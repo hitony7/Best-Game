@@ -1,4 +1,5 @@
 import java.io.File;
+import java.net.URL;
 import java.util.Scanner;
 
 public class LevelLoad {
@@ -7,9 +8,8 @@ public class LevelLoad {
 	public LevelLoad(Screen screen) {
 		this.screen = screen;
 	}
-	
-	public void loadSave(File loadPath) {
-		System.out.println("WORK");
 
-}
+	public void loadSave(File path) {
+		System.out.println("work");
+	}
 }

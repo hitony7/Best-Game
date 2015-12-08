@@ -12,7 +12,7 @@ public class Room {
 	public Room(String ID) {
 		DefineRoomLayer1();
 		DefineRoomLayer2();
-		System.out.println(ID);
+	//	System.out.println(ID);
 	}
 
 	public void DefineRoomLayer1() {

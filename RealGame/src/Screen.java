@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-
+import resources.Pic;
 
 public class Screen extends JPanel implements Runnable {
 
@@ -23,7 +23,7 @@ public class Screen extends JPanel implements Runnable {
 	public Player player;
 	public Room room;
 	public LevelLoad levelLoad;
-	
+
 	public Screen(Frame frame) {
 		frame.addKeyListener(new KeyMove(this));
 		frame.setSize(new Dimension(frame.getWidth(), frame.getHeight()));
@@ -44,6 +44,7 @@ public class Screen extends JPanel implements Runnable {
 		// initialize instance
 		room = new Room("spawn");
 		player = new Player("Jason Tran");
+		levelLoad = new LevelLoad(this);
 		System.out.println(player);
 	}
 
@@ -66,7 +67,7 @@ public class Screen extends JPanel implements Runnable {
 	public void run() {
 		// Runs game loop
 		while (true) {
-			if(isFirst){
+			if (isFirst) {
 				loadRoom("text.txt");
 				isFirst = false;
 			} else if (runGame) {
@@ -85,7 +86,10 @@ public class Screen extends JPanel implements Runnable {
 	}
 
 	private void loadRoom(String path) {
-		//levelLoad.loadSave(new File(resources.Pic.class.getResource(path).getFile()));
+		URL url = Pic.class.getResource(path);
+		System.out.println(url == null);
+		// File file = new File (url);
+		// System.out.println(file.exists());
 	}
 
 	private void update() {
