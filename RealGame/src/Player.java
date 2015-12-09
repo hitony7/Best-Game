@@ -37,7 +37,7 @@ public class Player extends Object {
 	}
 
 	public void physic() {
-		oldx = x; 
+		oldx = x;
 		oldy = y;
 		if (pUP) {
 			f = Player.face.UP;
@@ -91,12 +91,10 @@ public class Player extends Object {
 	public void draw(Graphics g) {
 		g.drawString(name, x, y - 10);
 		g.drawImage(image, x, y, width, height, null);
-		if (bullet != null) {
-			for (int i = 0; i < bullet.size(); i++) {
-				bullet.get(i).draw(g);
-			}
-
+		for (int i = 0; i < bullet.size(); i++) {
+			bullet.get(i).draw(g);
 		}
+
 	}
 
 }

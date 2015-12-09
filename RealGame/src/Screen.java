@@ -17,29 +17,36 @@ public class Screen extends JPanel implements Runnable {
 	public static boolean isFirst = true;
 	//Main Thread 
 	public Thread thread = new Thread(this);
-	public static int myWidth, myHeight;
+
 	//Referencing class 
 	public Frame frame;
 	public Player player;
 	public Room room;
 	public LevelLoad levelLoad;
-
+	/**
+	 * Screen constructor
+	 * adds keylistener and sets the panel size equal the the frame.
+	 * http://stackoverflow.com/questions/8820668/the-current-branch-is-not-configured-for-pull-no-value-for-key-branch-master-mer
+	 */
 	public Screen(Frame frame) {
 		frame.addKeyListener(new KeyMove(this));
 		frame.setSize(new Dimension(frame.getWidth(), frame.getHeight()));
-		myWidth = this.getWidth();
-		myHeight = this.getHeight();
 		define();
-		thread.start();
+		thread.start(); //Starts Thread
 	}
-
+	
+	/**
+	 * Paints room and player
+	 * Lightweight vs paint
+	 */
 	public void paintComponent(Graphics g) {
-		// Render
 		g.clearRect(0, 0, getWidth(), getHeight());// Clears
 		room.draw(g);
 		player.draw(g);
 	}
-
+	/**
+	 * Make new instances of room,players,and level load.
+	 */
 	public void define() {
 		// initialize instance
 		room = new Room("spawn");
@@ -48,10 +55,13 @@ public class Screen extends JPanel implements Runnable {
 		System.out.println(player);
 	}
 
+	/**
+	 * Collisions checker
+	 */
 	public void checkC() {
-		// bulletCheck
+		// bulletCheck to blocks 
+        //Loops through (columns,rows,bullets(Dynamic Data))
 		ArrayList<Bullet> bullet = player.getbullet();
-
 		for (int y = 0; y < room.blocks.length; y++) {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				for (int i = 0; i < bullet.size(); i++) {
@@ -63,7 +73,8 @@ public class Screen extends JPanel implements Runnable {
 
 			}
 		}
-		// Player Movement check
+		// Player block check 
+		//Loops through(columns,rows) then checks if passable set to old location
 		for (int y = 0; y < room.blocks.length; y++) {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				if (player.collison(room.blocks[y][x])
@@ -73,7 +84,8 @@ public class Screen extends JPanel implements Runnable {
 				}
 			}
 		}
-		// 
+		//Player exit check
+		//Loops through(columns,rows) then checks if blocks is exit
 		for (int y = 0; y < room.blocks.length; y++) {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				if (player.collison(room.blocks[y][x])
@@ -83,12 +95,13 @@ public class Screen extends JPanel implements Runnable {
 			}
 		}
 	}
-
+	/**
+	 * The game loop(Thread)
+	 */
 	public void run() {
-		// Runs game loop
 		while (true) {
 			if (isFirst) {
-				loadRoom("test.txt");
+				loadRoom("test.txt"); //First run needs to read room before updating
 				isFirst = false;
 			} else if (runGame) {
 				update(); // update
@@ -104,13 +117,17 @@ public class Screen extends JPanel implements Runnable {
 		}
 
 	}
-
+	/**
+	 * File loader turns string into a file to be read in levelload
+	 */
 	private void loadRoom(String path) {
 		String url = Pic.class.getResource(path).getFile();
 		File file = new File(url);
 		levelLoad.loadSave(file);
 	}
-
+	/**
+	 * File loader turns string into a file to be read in levelload
+	 */
 	private void update() {
 		player.bulletMove();
 		player.physic();
