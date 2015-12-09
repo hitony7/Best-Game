@@ -50,12 +50,20 @@ public class Screen extends JPanel implements Runnable {
 
 	public void checkC() {
 		ArrayList<Bullet> bullet = player.getbullet();
-		// bulletCheck
-		for (int i = 0; i < bullet.size(); i++) {
-			if (bullet.get(i).collison(room.blocks[0][0])) {
-				bullet.remove(i);
+		for(int y=0;y<room.blocks.length;y++) {
+			for(int x=0;x<room.blocks[0].length;x++) {
+				for (int i = 0; i < bullet.size(); i++) {
+					if (bullet.get(i).collison(room.blocks[y][x]) && room.blocks[y][x].passable == false) {
+						bullet.remove(i);
+					}
+				}
+			
+				
 			}
 		}
+	
+		// bulletCheck
+
 		// Needs Double for loop x and y;
 		for (int i = 0; i < 5; i++) {
 			if (player.collison(room.blocks[0][0])) {

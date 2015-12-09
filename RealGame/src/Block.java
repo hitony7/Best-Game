@@ -5,6 +5,7 @@ public class Block extends Object {
 	int id;
 	int wallID = 1;
 	int floorID = 0;
+	boolean passable;
 
 	// Image wallPic = imageLoad("Brick_white_wall.jpg");
 
@@ -20,10 +21,11 @@ public class Block extends Object {
 		// Background and walls
 		if (id == wallID) {
 			g.drawImage(BlcImages.wallPic, x, y, height, width, null);
+			passable = false;
 		} 
 		if (id == floorID) {
 			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
-
+			passable = true;
 		}
 	}
 

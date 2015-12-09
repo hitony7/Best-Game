@@ -3,6 +3,8 @@ import java.net.URL;
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class LevelLoad {
 	Screen screen;
 
@@ -11,13 +13,21 @@ public class LevelLoad {
 	}
 
 	public void loadSave(File path) {
-		System.out.println("work");
 		try {
-			Scanner scanner = new Scanner(path);
+			Scanner loadScanner = new Scanner(path);
 			
-			scanner.close();
-			System.out.println("fileloaded");
-		} catch (Exception e) {
-		}
+			while (loadScanner.hasNext()) {
+				System.out.println("fileloaded");
+				for(int y=0;y<screen.room.blocks.length;y++) {
+					for(int x=0;x<screen.room.blocks[0] .length;x++) {
+						screen.room.blocks[y][x].id = loadScanner.nextInt();
+					
+						
+					}
+				}
+			}
+			
+			loadScanner.close();
+		} catch(Exception e) { }
 	}
 }
