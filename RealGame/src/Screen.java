@@ -26,11 +26,11 @@ public class Screen extends JPanel implements Runnable {
 	/**
 	 * Screen constructor
 	 * adds keylistener and sets the panel size equal the the frame.
-	 * http://stackoverflow.com/questions/8820668/the-current-branch-is-not-configured-for-pull-no-value-for-key-branch-master-mer
+	 * 
 	 */
 	public Screen(Frame frame) {
 		frame.addKeyListener(new KeyMove(this));
-		frame.setSize(new Dimension(frame.getWidth(), frame.getHeight()));
+		frame.setSize(new Dimension(frame.getWidth(), frame.getHeight()+28));
 		define();
 		thread.start(); //Starts Thread
 	}
@@ -90,7 +90,7 @@ public class Screen extends JPanel implements Runnable {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				if (player.collison(room.blocks[y][x])
 						&& room.blocks[y][x].id == Block.exitID) {
-					System.out.println("exting");
+					System.out.println("exiting");
 				}
 			}
 		}

@@ -7,7 +7,7 @@ public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	//Frame properties 
 	public static String title = "legal legindz";
-	public static Dimension size = new Dimension(1280, 720);
+	public static Dimension size = new Dimension(1200, 720);
 
 	/**
 	 * Window constructor
