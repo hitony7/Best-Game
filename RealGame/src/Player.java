@@ -13,6 +13,7 @@ public class Player extends Object {
 	}
 
 	int currentRoomId;
+	int oldx, oldy;
 	String name;
 	BufferedImage image;
 
@@ -29,13 +30,15 @@ public class Player extends Object {
 		x = 300;
 		y = 300;
 		height = 100;
-		width = 100;
+		width = 80;
 		speed = 8;
 		image = imageLoad("turtle.png");
 		bullet = new ArrayList<Bullet>();
 	}
 
 	public void physic() {
+		oldx = x; 
+		oldy = y;
 		if (pUP) {
 			f = Player.face.UP;
 			up();

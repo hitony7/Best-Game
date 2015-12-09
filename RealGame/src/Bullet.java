@@ -42,7 +42,6 @@ public class Bullet extends Object {
 
 	public void draw(Graphics g) {
 		if (inGame) {
-			g.drawRect(x, y, width, height);
 			g.drawImage(image, x, y, width, height, null);
 		}
 

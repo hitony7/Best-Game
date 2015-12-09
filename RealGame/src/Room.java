@@ -5,14 +5,14 @@ public class Room {
 	public Block[][] blocks;
 	public Block[][] layer2;
 
-	public int worldWidth = 10;
-	public int worldHeight = 7;
-	public int blockSize = 100;
+	public int worldWidth = 15;
+	public int worldHeight = 9;
+	public int blockSize = 80;
 
 	public Room(String ID) {
 		DefineRoomLayer1();
 		DefineRoomLayer2();
-	//	System.out.println(ID);
+		System.out.println(ID);
 	}
 
 	public void DefineRoomLayer1() {

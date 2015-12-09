@@ -12,14 +12,14 @@ import resources.Pic;
 public class Screen extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-
+	//Game Conditions 
 	public static boolean runGame = true;
 	public static boolean isFirst = true;
-
-	public static Frame frame;
+	//Main Thread 
 	public Thread thread = new Thread(this);
 	public static int myWidth, myHeight;
-
+	//Referencing class 
+	public Frame frame;
 	public Player player;
 	public Room room;
 	public LevelLoad levelLoad;
@@ -49,25 +49,37 @@ public class Screen extends JPanel implements Runnable {
 	}
 
 	public void checkC() {
+		// bulletCheck
 		ArrayList<Bullet> bullet = player.getbullet();
-		for(int y=0;y<room.blocks.length;y++) {
-			for(int x=0;x<room.blocks[0].length;x++) {
+
+		for (int y = 0; y < room.blocks.length; y++) {
+			for (int x = 0; x < room.blocks[0].length; x++) {
 				for (int i = 0; i < bullet.size(); i++) {
-					if (bullet.get(i).collison(room.blocks[y][x]) && room.blocks[y][x].passable == false) {
+					if (bullet.get(i).collison(room.blocks[y][x])
+							&& room.blocks[y][x].passable == false) {
 						bullet.remove(i);
 					}
 				}
-			
-				
+
 			}
 		}
-	
-		// bulletCheck
-
-		// Needs Double for loop x and y;
-		for (int i = 0; i < 5; i++) {
-			if (player.collison(room.blocks[0][0])) {
-				player.x = player.x;
+		// Player Movement check
+		for (int y = 0; y < room.blocks.length; y++) {
+			for (int x = 0; x < room.blocks[0].length; x++) {
+				if (player.collison(room.blocks[y][x])
+						&& room.blocks[y][x].passable != true) {
+					player.x = player.oldx;
+					player.y = player.oldy;
+				}
+			}
+		}
+		// 
+		for (int y = 0; y < room.blocks.length; y++) {
+			for (int x = 0; x < room.blocks[0].length; x++) {
+				if (player.collison(room.blocks[y][x])
+						&& room.blocks[y][x].id == Block.exitID) {
+					System.out.println("exting");
+				}
 			}
 		}
 	}
@@ -95,8 +107,8 @@ public class Screen extends JPanel implements Runnable {
 
 	private void loadRoom(String path) {
 		String url = Pic.class.getResource(path).getFile();
-		 File file = new File (url);
-		 levelLoad.loadSave(file);
+		File file = new File(url);
+		levelLoad.loadSave(file);
 	}
 
 	private void update() {
