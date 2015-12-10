@@ -41,10 +41,11 @@ public class Object extends JLabel {
 	 * @return
 	 */
 	public boolean collison(Object object2) {
-		Rectangle r = new Rectangle(this.x, this.y, this.height, this.width);
-		Rectangle r2 = new Rectangle(object2.x, object2.y, object2.height,
-				object2.width);
-		return r.intersects(r2);
+		return this.getBounds().intersects(object2.getBounds());
+		//Rectangle r = new Rectangle(this.x, this.y, this.height, this.width);
+		//Rectangle r2 = new Rectangle(object2.x, object2.y, object2.height,
+	    //object2.width);
+		//return r.intersects(r2);
 	}
 
 	/**

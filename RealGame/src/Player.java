@@ -39,6 +39,7 @@ public class Player extends Object {
 	 */
 	public Player(String name) {
 		this.name = name;
+	//	this.setBounds();
 		x = 300;
 		y = 300;
 		height = 80;
@@ -89,9 +90,7 @@ public class Player extends Object {
 	 */
 	public void bulletMove() {
 		for (int i = 0; i < bullet.size(); i++) {
-			if (bullet.get(i) != null) {
 				bullet.get(i).shoot();
-			}
 		}
 
 	}
