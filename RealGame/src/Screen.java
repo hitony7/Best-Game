@@ -90,7 +90,10 @@ public class Screen extends JPanel implements Runnable {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				if (player.collison(room.blocks[y][x])
 						&& room.blocks[y][x].id == Block.exitID) {
-					System.out.println("exiting");
+						if (player.y <= 0){
+							System.out.println("newroom");
+						}
+					
 				}
 			}
 		}

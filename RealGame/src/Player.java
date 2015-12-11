@@ -3,6 +3,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 
@@ -12,7 +14,7 @@ public class Player extends Object {
 		UP, DOWN, LEFT, RIGHT;
 	}
 
-	//Properties  
+	// Properties
 	public String name;
 	public int health;
 	public int coin;
@@ -21,16 +23,18 @@ public class Player extends Object {
 	// players locations/direction
 	int currentRoomId;
 	int oldx, oldy;
+	Timer runcd = new Timer();
+	Timer slowing = new Timer();
 	BufferedImage image;
 	public boolean pUP;
 	public boolean pDOWN;
 	public boolean pRIGHT;
 	public boolean pLEFT;
 	public boolean space;
+
 	public face f = Player.face.LEFT;
 
 	public ArrayList<Bullet> bullet; // dynamic data structures
-
 
 	/**
 	 * constructor for player defines x, y, width, height loads image
@@ -39,12 +43,12 @@ public class Player extends Object {
 	 */
 	public Player(String name) {
 		this.name = name;
-	//	this.setBounds();
+		setBounds(x, y, width, height);
 		x = 300;
 		y = 300;
 		height = 80;
 		width = 80;
-		speed = 1;
+		speed = 5;
 		image = imageLoad("turtle.png");
 		bullet = new ArrayList<Bullet>();
 	}
@@ -71,7 +75,7 @@ public class Player extends Object {
 			f = Player.face.RIGHT;
 			right();
 		}
-		if (running){
+		if (running) {
 			running();
 		}
 		if (space) {
@@ -81,8 +85,21 @@ public class Player extends Object {
 	}
 
 	public void running() {
-		System.out.println("running");
 		speed = runSpeed;
+		runcd.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (speed != 5) {
+					deacceleration();
+				}
+			}
+
+			private void deacceleration() {
+				speed -= 1;
+				System.out.println("slow");
+			}
+		}, 1000);
+
 	}
 
 	/**
@@ -90,23 +107,27 @@ public class Player extends Object {
 	 */
 	public void bulletMove() {
 		for (int i = 0; i < bullet.size(); i++) {
-				bullet.get(i).shoot();
+			bullet.get(i).shoot();
 		}
 
 	}
+
 	/**
 	 * creates the bullet and adds to arraylist
 	 */
 	private void fire() {
-		bullet.add(new Bullet(this, getX(), getY(), 20, 20));    // Creates New Bullets
-		space = false;                                           // reset space
+		bullet.add(new Bullet(this, getX(), getY(), 20, 20)); // Creates New
+																// Bullets
+		space = false; // reset space
 	}
+
 	/**
 	 * getters
+	 * 
 	 * @return
 	 */
 	public ArrayList<Bullet> getbullet() {
-		return bullet;                  
+		return bullet;
 	}
 
 	public int getX() {
@@ -118,15 +139,15 @@ public class Player extends Object {
 	}
 
 	/**
-	 * draw method
-	 * draws bullets, name, image
+	 * draw method draws bullets, name, image
+	 * 
 	 * @param g
 	 */
 	public void draw(Graphics g) {
-		g.drawString(name, x, y - 10);                 //name above player
+		g.drawString(name, x, y - 10); // name above player
 		g.drawImage(image, x, y, width, height, null); // player image
-		for (int i = 0; i < bullet.size(); i++) {      // loop
-			bullet.get(i).draw(g);                     // for every bullet
+		for (int i = 0; i < bullet.size(); i++) { // loop
+			bullet.get(i).draw(g); // for every bullet
 		}
 
 	}
