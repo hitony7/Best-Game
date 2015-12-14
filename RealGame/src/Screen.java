@@ -90,14 +90,21 @@ public class Screen extends JPanel implements Runnable {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				if (player.collison(room.blocks[y][x])
 						&& room.blocks[y][x].id == Block.exitID) {
-						if (player.y <= 0){
-							System.out.println("newroom");
-						}
-					
+					       whichroom();
 				}
 			}
 		}
 	}
+	private void whichroom() {	
+		System.out.println(player.y);
+		if(player.y < -60){
+			player.y = 700;
+			loadRoom("monster.txt");
+			
+		}
+		
+	}
+
 	/**
 	 * The game loop(Thread)
 	 */
