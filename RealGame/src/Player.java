@@ -31,6 +31,7 @@ public class Player extends Object {
 	public boolean pRIGHT;
 	public boolean pLEFT;
 	public boolean space;
+	public String loc;
 
 	public face f = Player.face.LEFT;
 
@@ -41,9 +42,10 @@ public class Player extends Object {
 	 * 
 	 * @param name
 	 */
-	public Player(String name) {
+	public Player(String name , String id) {
 		this.name = name;
 		setBounds(x, y, width, height);
+		loc = id;
 		x = 300;
 		y = 300;
 		height = 80;

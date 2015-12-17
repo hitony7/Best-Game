@@ -2,13 +2,13 @@ import java.awt.Graphics;
 
 public class Room {
 
-	String ID;
+	public String ID;
 	// Data structures
 	public Block[][] blocks;
 	public Block[][] layer2;
 
-	public int worldWidth = 15; // max width of room
-	public int worldHeight = 9; // max height of room
+	public int worldWidth = 15+2; // max width of room
+	public int worldHeight = 9+2; // max height of room
 	public int blockSize = 80;
 
 	/**
@@ -19,6 +19,7 @@ public class Room {
 	public Room(String ID) {
 		DefineRoomLayer1();
 		DefineRoomLayer2();
+		this.ID = ID;
 		System.out.println(ID);
 	}
 
@@ -30,7 +31,7 @@ public class Room {
 		blocks = new Block[worldHeight][worldWidth];
 		for (int y = 0; y < blocks.length; y++) {
 			for (int x = 0; x < blocks[0].length; x++) {
-				blocks[y][x] = new Block(x * blockSize, y * blockSize,
+				blocks[y][x] = new Block((x  * blockSize) - blockSize, (y * blockSize) - blockSize,
 						blockSize, blockSize);
 			}
 		}

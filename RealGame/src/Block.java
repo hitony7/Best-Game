@@ -5,7 +5,7 @@ public class Block extends Object {
 	int id;
 	int wallID = 1;
 	int floorID = 0;
-	static int exitID = 2;
+    static int exitID = 2;
 	boolean passable;
 
 	// Image wallPic = imageLoad("Brick_white_wall.jpg");
@@ -28,7 +28,7 @@ public class Block extends Object {
 			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
 			passable = true;
 		}
-		if (id == exitID) {
+		if (id == exitID || id == 3 || id == 4 || id == 5) {
 			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
 			passable = true;
 		}
