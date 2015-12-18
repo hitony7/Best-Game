@@ -6,6 +6,7 @@ public class Block extends Object {
 	int wallID = 1;
 	int floorID = 0;
     static int exitID = 2;
+    int spawner = 2;
 	boolean passable;
 
 	// Image wallPic = imageLoad("Brick_white_wall.jpg");
@@ -36,9 +37,8 @@ public class Block extends Object {
 
 	public void drawLayer2(Graphics g) {
 		// Object(Interactive Stuff)
-		if (id == floorID) {
-			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
-
+		if (id == spawner) {
+			g.drawImage(BlcImages.crack, x, y, height, width, null);
 		}
 	}
 }

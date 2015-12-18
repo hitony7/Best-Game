@@ -144,6 +144,20 @@ public class Screen extends JPanel implements Runnable {
 				player.x = room.blocks[blocky][0].x;
 			}
 		}
+		if (currentid == 4) {
+			if (roomID == "spawn") {
+				System.out.println(roomID);
+				loadRoom("down.txt");
+				room.ID = "down";
+				player.y = room.blocks[0][blockx].y;
+			} else if (roomID == "down") {
+				System.out.println(roomID);
+				loadRoom("test.txt");
+				room.ID = "spawn";
+				player.y = room.blocks[9][blockx].y;
+			}
+		}
+		
 	}
 	
 
