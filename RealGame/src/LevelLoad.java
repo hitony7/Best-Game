@@ -18,13 +18,15 @@ public class LevelLoad {
 				for (int y = 0; y < screen.room.blocks.length; y++) {
 					for (int x = 0; x < screen.room.blocks[0].length; x++) {
 						screen.room.blocks[y][x].id = loadScanner.nextInt();
+						System.out.println(screen.room.layer2[0].length);
+						System.out.println(x);
 
 					}
 				}
-				System.out.println("dsafdshaf");
 				for (int y = 0; y < screen.room.layer2.length; y++) {
 					for (int x = 0; x < screen.room.layer2[0].length; x++) {
 						screen.room.layer2[y][x].id = loadScanner.nextInt();
+						System.out.println(screen.room.layer2[y][x].id);
 					}
 				}
 			}
