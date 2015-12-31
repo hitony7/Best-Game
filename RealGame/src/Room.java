@@ -59,7 +59,7 @@ public class Room {
 		for (int y = 0; y < blocks.length; y++) {            
 			for (int x = 0; x < blocks[0].length; x++) {     
 				blocks[y][x].draw(g);
-				//layer2[y][x].draw(g);
+				layer2[y][x].drawLayer2(g);
 			}
 		}
 	}

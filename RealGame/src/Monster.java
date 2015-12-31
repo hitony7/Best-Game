@@ -13,8 +13,6 @@ public class Monster extends Object {
 	
 	public void draw(Graphics g) {
 			g.drawImage(BlcImages.monsterb, x, y, width, height, null);
-		
-
 	}
 
 
