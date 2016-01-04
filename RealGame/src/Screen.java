@@ -15,6 +15,7 @@ public class Screen extends JPanel implements Runnable {
 	// Game Conditions
 	public static boolean runGame = true;
 	public static boolean isFirst = true;
+	public static boolean spawnfirst = true;
 	// Main Thread
 	public Thread thread = new Thread(this);
 
@@ -23,6 +24,7 @@ public class Screen extends JPanel implements Runnable {
 	public Player player;
 	public Room room;
 	public LevelLoad levelLoad;
+	public Spawner spawn;
 
 	/**
 	 * Screen constructor adds keylistener and sets the panel size equal the the
@@ -105,6 +107,11 @@ public class Screen extends JPanel implements Runnable {
 	private void whichroom(int currentid, String roomID, int blocky, int blockx) {
 		if (currentid == 3) {
 			if (roomID == "spawn") {
+				if (spawnfirst){
+					System.out.println("sad");
+					 spawn = new Spawner();
+					 spawnfirst = false;
+				 }
 				System.out.println(roomID);
 				loadRoom("monster.txt");
 				room.ID = "monster";
