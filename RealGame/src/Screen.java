@@ -174,6 +174,7 @@ public class Screen extends JPanel implements Runnable {
 				update(); // update
 				checkC(); // check collision
 				repaint(); // render
+				System.out.println(player.currentRoomId);
 			}
 			try {
 				Thread.sleep(1000 / 60);// 1000/60 = 60fps
