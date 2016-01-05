@@ -24,7 +24,7 @@ public class Screen extends JPanel implements Runnable {
 	public Player player;
 	public Room room;
 	public LevelLoad levelLoad;
-	public Spawner spawn;
+	public Spawner spawner;
 
 	/**
 	 * Screen constructor adds keylistener and sets the panel size equal the the
@@ -45,6 +45,9 @@ public class Screen extends JPanel implements Runnable {
 		g.clearRect(0, 0, getWidth(), getHeight());// Clears
 		room.draw(g);
 		player.draw(g);
+		if(spawner != null){
+			spawner.draw(g);
+		}
 	}
 
 	/**
@@ -107,11 +110,10 @@ public class Screen extends JPanel implements Runnable {
 	private void whichroom(int currentid, String roomID, int blocky, int blockx) {
 		if (currentid == 3) {
 			if (roomID == "spawn") {
-				if (spawnfirst){
-					System.out.println("sad");
-					 spawn = new Spawner();
-					 spawnfirst = false;
-				 }
+				if (spawnfirst) {
+					spawner = new Spawner();
+					spawnfirst = false;
+				}
 				System.out.println(roomID);
 				loadRoom("monster.txt");
 				room.ID = "monster";
@@ -164,9 +166,8 @@ public class Screen extends JPanel implements Runnable {
 				player.y = room.blocks[9][blockx].y;
 			}
 		}
-		
+
 	}
-	
 
 	/**
 	 * The game loop(Thread)
@@ -181,7 +182,7 @@ public class Screen extends JPanel implements Runnable {
 				update(); // update
 				checkC(); // check collision
 				repaint(); // render
-				System.out.println(player.currentRoomId);
+				
 			}
 			try {
 				Thread.sleep(1000 / 60);// 1000/60 = 60fps
@@ -206,6 +207,9 @@ public class Screen extends JPanel implements Runnable {
 	 * File loader turns string into a file to be read in levelload
 	 */
 	private void update() {
+		if(spawner != null){
+		 spawner.monMove();	
+		}
 		player.bulletMove();
 		player.physic();
 	}

@@ -20,7 +20,7 @@ public class Room {
 		DefineRoomLayer1();
 		DefineRoomLayer2();
 		this.ID = ID;
-		System.out.println(ID);
+		//System.out.println(ID);
 	}
 
 	/**

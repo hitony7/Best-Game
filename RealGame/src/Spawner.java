@@ -10,9 +10,8 @@ public class Spawner implements ActionListener {
 	public ArrayList<Monster> mobs;
 	
 	public Spawner(){
-		 spawninterval = new Timer(1000 / 60, this);
+		 spawninterval = new Timer(1000, this);
 		 spawninterval.start();
-		 System.out.println(spawninterval);
 		 mobs = new ArrayList<Monster>();
 	}
 	
@@ -22,6 +21,11 @@ public class Spawner implements ActionListener {
 			mobs.get(i).draw(g); // for every monster
 		}
      }
+	public void monMove(){
+		for (int i = 0; i < mobs.size(); i++) {
+			mobs.get(i).move();
+		}	
+	}
 	
 	public ArrayList<Monster> getmobs() {
 		return mobs;
@@ -31,7 +35,7 @@ public class Spawner implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("newthing");
-		mobs.add(new Monster(800, 160, 100, 100, 1));
+		mobs.add(new Monster(550, 60, 100, 100, 1));
 		
 	}
 	
