@@ -25,6 +25,7 @@ public class Screen extends JPanel implements Runnable {
 	public Room room;
 	public LevelLoad levelLoad;
 	public Spawner spawner;
+	public Hud hud;
 
 	/**
 	 * Screen constructor adds keylistener and sets the panel size equal the the
@@ -45,8 +46,9 @@ public class Screen extends JPanel implements Runnable {
 		g.clearRect(0, 0, getWidth(), getHeight());// Clears
 		room.draw(g);
 		player.draw(g);
+		hud.draw(g);
 		if(spawner != null){
-			spawner.draw(g);
+			spawner.draw(g, room.ID);
 		}
 	}
 
@@ -55,6 +57,7 @@ public class Screen extends JPanel implements Runnable {
 	 */
 	public void define() {
 		// initialize instance
+		hud = new Hud(this);
 		room = new Room("spawn");
 		player = new Player("Jason Tran", room.ID);
 		levelLoad = new LevelLoad(this);

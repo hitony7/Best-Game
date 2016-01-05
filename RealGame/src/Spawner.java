@@ -16,9 +16,11 @@ public class Spawner implements ActionListener {
 	}
 	
 	
-	public void draw(Graphics g) {
-		for (int i = 0; i < mobs.size(); i++) { // loop
-			mobs.get(i).draw(g); // for every monster
+	public void draw(Graphics g, String currentroom) {
+		if(currentroom == "monster"){
+			for (int i = 0; i < mobs.size(); i++) { // loop
+				mobs.get(i).draw(g); // for every monster
+			}	
 		}
      }
 	public void monMove(){

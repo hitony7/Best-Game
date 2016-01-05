@@ -16,8 +16,8 @@ public class Player extends Object {
 
 	// Properties
 	public String name;
-	public int health;
-	public int coin;
+	public int health = 20;
+	public int coin = 0;
 	public boolean running;
 	public int runSpeed = 15;
 	// players locations/direction
