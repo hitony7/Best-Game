@@ -68,6 +68,7 @@ public class Screen extends JPanel implements Runnable {
 	 * Collisions checker
 	 */
 	public void checkC() {
+		checkmobs();
 		// bulletCheck to blocks
 		// Loops through (columns,rows,bullets(Dynamic Data))
 		ArrayList<Bullet> bullet = player.getbullet();
@@ -108,6 +109,26 @@ public class Screen extends JPanel implements Runnable {
 				}
 			}
 		}
+	}
+
+	private void checkmobs() {
+		if(spawner != null){
+			ArrayList<Monster> monster = spawner.getmobs();
+			for (int i = 0; i < monster.size(); i++) {
+				if (monster.get(i).collison(player) ) {
+					monster.remove(i);
+					player.health--;
+				}
+			}
+			
+			
+			
+			
+		}
+
+			
+		
+		
 	}
 
 	private void whichroom(int currentid, String roomID, int blocky, int blockx) {
