@@ -7,6 +7,7 @@ public class Bullet extends Object {
 	public boolean inGame = false;
 	BufferedImage image;
 	int speed = 10;
+	int damage;
 	final Player.face f;
 
 	public Bullet(Player player, int x, int y, int height, int width) {
@@ -16,6 +17,7 @@ public class Bullet extends Object {
 		this.y = y;
 		this.height = height;
 		this.width = width;
+		damage = 1;
 		image = imageLoad("Bullet.png");
 		inGame = true;
 	}

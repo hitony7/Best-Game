@@ -47,7 +47,7 @@ public class Screen extends JPanel implements Runnable {
 		room.draw(g);
 		player.draw(g);
 		hud.draw(g);
-		if(spawner != null){
+		if (spawner != null) {
 			spawner.draw(g, room.ID);
 		}
 	}
@@ -68,10 +68,10 @@ public class Screen extends JPanel implements Runnable {
 	 * Collisions checker
 	 */
 	public void checkC() {
-		checkmobs();
 		// bulletCheck to blocks
 		// Loops through (columns,rows,bullets(Dynamic Data))
 		ArrayList<Bullet> bullet = player.getbullet();
+		checkmobs(bullet);
 		for (int y = 0; y < room.blocks.length; y++) {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				for (int i = 0; i < bullet.size(); i++) {
@@ -111,24 +111,30 @@ public class Screen extends JPanel implements Runnable {
 		}
 	}
 
-	private void checkmobs() {
-		if(spawner != null){
+	private void checkmobs(ArrayList<Bullet> bullet) {
+		if (spawner != null) {
 			ArrayList<Monster> monster = spawner.getmobs();
 			for (int i = 0; i < monster.size(); i++) {
-				if (monster.get(i).collison(player) ) {
+				if (monster.get(i).collison(player)) {
+					player.health -= monster.get(i).damage;
 					monster.remove(i);
-					player.health--;
 				}
 			}
-			
-			
-			
-			
+			for (int x = 0; x < monster.size(); x++) {
+				for (int i = 0; i < bullet.size(); i++) {
+					if (bullet.get(i).collison(monster.get(x))) {
+						System.out.println(monster.get(x).health -= bullet
+								.get(i).damage);
+						monster.get(x).health -= bullet.get(i).damage;
+						// monster.remove(x); //bug
+						bullet.remove(i);
+					}
+				}
+
+			}
+			checkHP(monster);
 		}
 
-			
-		
-		
 	}
 
 	private void whichroom(int currentid, String roomID, int blocky, int blockx) {
@@ -192,6 +198,15 @@ public class Screen extends JPanel implements Runnable {
 		}
 
 	}
+	private void checkHP(ArrayList<Monster> monster) {
+		for (int i = 0; i < monster.size(); i++) {
+			if (monster.get(i).health <= 0) {
+				player.coin += monster.get(i).randCoin();
+		        monster.remove(i);
+			}
+		}
+	
+	}
 
 	/**
 	 * The game loop(Thread)
@@ -206,7 +221,7 @@ public class Screen extends JPanel implements Runnable {
 				update(); // update
 				checkC(); // check collision
 				repaint(); // render
-				
+
 			}
 			try {
 				Thread.sleep(1000 / 60);// 1000/60 = 60fps
@@ -231,8 +246,8 @@ public class Screen extends JPanel implements Runnable {
 	 * File loader turns string into a file to be read in levelload
 	 */
 	private void update() {
-		if(spawner != null){
-		 spawner.monMove();	
+		if (spawner != null) {
+			spawner.monMove();
 		}
 		player.bulletMove();
 		player.physic();
