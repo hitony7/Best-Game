@@ -115,7 +115,7 @@ public class Screen extends JPanel implements Runnable {
 		if (spawner != null) {
 			ArrayList<Monster> monster = spawner.getmobs();
 			for (int i = 0; i < monster.size(); i++) {
-				if (monster.get(i).collison(player)) {
+				if (monster.get(i).collison(player) && room.ID == "monster") {
 					player.health -= monster.get(i).damage;
 					monster.remove(i);
 				}
@@ -141,7 +141,7 @@ public class Screen extends JPanel implements Runnable {
 		if (currentid == 3) {
 			if (roomID == "spawn") {
 				if (spawnfirst) {
-					spawner = new Spawner();
+					spawner = new Spawner(this);
 					spawnfirst = false;
 				}
 				System.out.println(roomID);

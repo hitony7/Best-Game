@@ -8,11 +8,13 @@ import javax.swing.Timer;
 public class Spawner implements ActionListener {
 	public Timer spawninterval;
 	public ArrayList<Monster> mobs;
+    Screen screen;
 	
-	public Spawner(){
+	public Spawner(Screen screen){
 		 spawninterval = new Timer(1000, this);
 		 spawninterval.start();
 		 mobs = new ArrayList<Monster>();
+		 this.screen = screen;
 	}
 	
 	
@@ -37,7 +39,7 @@ public class Spawner implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("newthing");
-		mobs.add(new Monster(550, 60, 100, 100, 1));
+		mobs.add(new Monster(550, 60, 100, 100, 1,screen));
 		
 	}
 	
