@@ -11,19 +11,20 @@ public class Hud {
 	JLabel health = new JLabel();
 	JLabel coins = new JLabel();
 	Rectangle back = new Rectangle(10,10,150,50);
+	
 
 	Screen screen;
 
 	public Hud(Screen screen) {
-		TextArea text = new TextArea();
 		this.screen = screen;
 	}
 
 	public void draw(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.fill(back);
+		//Graphics2D g2 = (Graphics2D) g;
+		//g2.fill(back);
+		g.drawImage(BlcImages.backpanel, back.x, back.y, back.width, back.height, null);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-		g2.setOpacity(0.55f);
+	
 		
 		g.setColor(Color.WHITE);
 		g.drawString("Health: " +  screen.player.health, 15, 30);
