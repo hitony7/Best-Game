@@ -23,7 +23,7 @@ public class Hud {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.fill(back);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-		g2.setOpacity(0.55f);
+	//	g2.setOpacity(0.55f);
 		
 		g.setColor(Color.WHITE);
 		g.drawString("Health: " +  screen.player.health, 15, 30);
