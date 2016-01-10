@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,17 +21,26 @@ public class Player extends Object {
 	public int coin = 0;
 	public boolean running;
 	public int runSpeed = 15;
+	BufferedImage image;
+	public boolean cooldown= true;
 	// players locations/direction
 	int currentRoomId;
 	int oldx, oldy;
 	Timer runcd = new Timer();
 	Timer slowing = new Timer();
-	BufferedImage image;
+	Timer shootcd = new Timer();
+	//Movement direction
 	public boolean pUP;
 	public boolean pDOWN;
 	public boolean pRIGHT;
 	public boolean pLEFT;
-	public boolean space;
+	
+	// Direction of player shooting
+	public boolean fUP;
+	public boolean fDOWN;
+	public boolean fRIGHT;
+	public boolean fLEFT;
+
 	public String loc;
 
 	public face f = Player.face.LEFT;
@@ -42,7 +52,7 @@ public class Player extends Object {
 	 * 
 	 * @param name
 	 */
-	public Player(String name , String id) {
+	public Player(String name, String id) {
 		this.name = name;
 		setBounds(x, y, width, height);
 		loc = id;
@@ -80,10 +90,13 @@ public class Player extends Object {
 		if (running) {
 			running();
 		}
-		if (space) {
-			fire();
+		if(cooldown){
+			if (fUP|| fDOWN||fRIGHT||fLEFT) {
+				fire();
+			}
+			
 		}
-
+	
 	}
 
 	public void running() {
@@ -118,9 +131,11 @@ public class Player extends Object {
 	 * creates the bullet and adds to arraylist
 	 */
 	private void fire() {
-		bullet.add(new Bullet(this, getX(), getY(), 20, 20)); // Creates New
-																// Bullets
-		space = false; // reset space
+			bullet.add(new Bullet(this, getX(), getY(), 20, 20, this.fUP,
+					this.fDOWN, this.fLEFT, this.fRIGHT)); // Creates New
+			
+		
+	//	space = false; // reset space
 	}
 
 	/**
@@ -138,6 +153,18 @@ public class Player extends Object {
 
 	public int getY() {
 		return y;
+	}
+	public boolean direCheck() {
+		if(fUP == true || fDOWN == true ||fRIGHT == true||fLEFT == true){
+			return true;
+		}
+		return false;
+
+			
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		
 	}
 
 	/**

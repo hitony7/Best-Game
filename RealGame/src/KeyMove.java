@@ -23,16 +23,25 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			screen.player.pLEFT = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			screen.player.space = true;
-		}
 		if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 			screen.player.running = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			screen.player.fUP = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			screen.player.fDOWN = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			screen.player.fRIGHT = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			screen.player.fLEFT = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_E) {
 			for (int i = 0; i < screen.room.blocks.length; i++) {
 				for (Block block : screen.room.blocks[i]) {
-					//System.out.println(block.id);
+					// System.out.println(block.id);
 				}
 			}
 		}
@@ -55,6 +64,18 @@ public class KeyMove implements KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 			screen.player.running = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			screen.player.fUP = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			screen.player.fDOWN = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			screen.player.fRIGHT = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			screen.player.fLEFT = false;
 		}
 
 	}
