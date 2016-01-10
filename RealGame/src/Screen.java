@@ -15,7 +15,7 @@ public class Screen extends JPanel implements Runnable {
 	// Game Conditions
 	public static boolean runGame = true;
 	public static boolean isFirst = true;
-	public static boolean spawnfirst = true;
+	public static boolean spawnfirst = true; 
 	// Main Thread
 	public Thread thread = new Thread(this);
 
@@ -47,7 +47,9 @@ public class Screen extends JPanel implements Runnable {
 		room.draw(g);
 		player.draw(g);
 		hud.draw(g);
+		
 		if (spawner != null) {
+		// only draw if in right room and not null
 			spawner.draw(g, room.ID);
 		}
 	}
@@ -70,14 +72,14 @@ public class Screen extends JPanel implements Runnable {
 	public void checkC() {
 		// bulletCheck to blocks
 		// Loops through (columns,rows,bullets(Dynamic Data))
-		ArrayList<Bullet> bullet = player.getbullet();
+		ArrayList<Bullet> bullet = player.getbullet(); //gets bullet arraylist
 		checkmobs(bullet);
 		for (int y = 0; y < room.blocks.length; y++) {
 			for (int x = 0; x < room.blocks[0].length; x++) {
 				for (int i = 0; i < bullet.size(); i++) {
 					if (bullet.get(i).collison(room.blocks[y][x])
 							&& room.blocks[y][x].passable == false) {
-						bullet.remove(i);
+						bullet.remove(i); //delete bullet
 					}
 				}
 
@@ -104,7 +106,8 @@ public class Screen extends JPanel implements Runnable {
 					if (player.y + player.height < 0 || player.y > getHeight()
 							|| player.x + player.width < 0
 							|| player.x > getWidth()) {
-						whichroom(room.blocks[y][x].id, room.ID, y, x);
+						//if outside the frame the check which room goto
+						whichroom(room.blocks[y][x].id, room.ID, y, x); 
 					}
 				}
 			}
@@ -136,12 +139,19 @@ public class Screen extends JPanel implements Runnable {
 		}
 
 	}
-
+/**
+ * gets blockID and room to switch rooms then 
+ * gets the players current y and x position, to set them on the proper side of the room    
+ * @param currentid
+ * @param roomID
+ * @param blocky
+ * @param blockx
+ */
 	private void whichroom(int currentid, String roomID, int blocky, int blockx) {
 		if (currentid == 3) {
 			if (roomID == "spawn") {
 				if (spawnfirst) {
-					spawner = new Spawner(this);
+					spawner = new Spawner(this); //if first time entering monster room then initial spawn class
 					spawnfirst = false;
 				}
 				System.out.println(roomID);
@@ -198,6 +208,11 @@ public class Screen extends JPanel implements Runnable {
 		}
 
 	}
+	/**
+	 * checks all monster health then remove hp > 0 ones. 
+	 * +coins are given to player 
+	 * @param monster
+	 */
 	private void checkHP(ArrayList<Monster> monster) {
 		for (int i = 0; i < monster.size(); i++) {
 			if (monster.get(i).health <= 0) {
@@ -247,7 +262,7 @@ public class Screen extends JPanel implements Runnable {
 	 */
 	private void update() {
 		if (spawner != null) {
-			spawner.monMove();
+			spawner.monMove(); //only run if spawner is on
 		}
 		player.bulletMove();
 		player.physic();

@@ -2,13 +2,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends Object {
+	//to refer the player class
 	private final Player player;
-	public boolean inGame = false;
+	//bullet properties
 	BufferedImage image;
 	int speed = 10;
 	int speedx;
 	int damage;
-	final Player.face f;
+   //Direction of bullet
 	public boolean UP;
 	public boolean DOWN;
 	public boolean RIGHT;
@@ -17,7 +18,6 @@ public class Bullet extends Object {
 	public Bullet(Player player, int x, int y, int height, int width,
 			boolean UP, boolean DOWN, boolean LEFT, boolean RIGHT) {
 		this.player = player;
-		f = this.player.f;
 		this.x = x;
 		this.y = y;
 		this.height = height;
@@ -28,11 +28,10 @@ public class Bullet extends Object {
 		this.RIGHT = RIGHT;
 		damage = 1;
 		image = imageLoad("Bullet.png");
-		inGame = true;
 	}
 
 	public void shoot() {
-		// Shooting depending on direction;
+		// Shooting depending on direction (left and right cannot be true at time and same with up and down);
 		if (LEFT) {
 			x -= speed;
 		} else if (RIGHT){
@@ -45,9 +44,6 @@ public class Bullet extends Object {
 		}
 	}
 
-	public void shooting() {
-
-	}
 
 	public int getX() {
 		return x;
@@ -56,7 +52,10 @@ public class Bullet extends Object {
 	public int getY() {
 		return y;
 	}
-
+    /**
+     * draw bullets
+     * @param g
+     */
 	public void draw(Graphics g) {
 
 		g.drawImage(image, x, y, width, height, null);

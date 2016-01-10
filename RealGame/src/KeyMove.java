@@ -11,6 +11,7 @@ public class KeyMove implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		// Player move direction
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			screen.player.pUP = true;
 		}
@@ -23,9 +24,7 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			screen.player.pLEFT = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-			screen.player.running = true;
-		}
+		// Player shoot direction
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			screen.player.fUP = true;
 		}
@@ -38,6 +37,7 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			screen.player.fLEFT = true;
 		}
+		// trouble shooting
 		if (e.getKeyCode() == KeyEvent.VK_E) {
 			for (int i = 0; i < screen.room.blocks.length; i++) {
 				for (Block block : screen.room.blocks[i]) {
@@ -50,6 +50,7 @@ public class KeyMove implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		// Player move direction set false
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			screen.player.pUP = false;
 		}
@@ -62,9 +63,7 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			screen.player.pLEFT = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-			screen.player.running = false;
-		}
+		// Player shoot direction set false
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			screen.player.fUP = false;
 		}

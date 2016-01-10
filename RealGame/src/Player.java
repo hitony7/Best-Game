@@ -1,19 +1,16 @@
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import javax.swing.Timer;
 
 import javax.imageio.ImageIO;
 
-public class Player extends Object {
-
-	public enum face {
-		UP, DOWN, LEFT, RIGHT;
-	}
+public class Player extends Object implements ActionListener {
 
 	// Properties
 	public String name;
@@ -22,19 +19,17 @@ public class Player extends Object {
 	public boolean running;
 	public int runSpeed = 15;
 	BufferedImage image;
-	public boolean cooldown= true;
+	public boolean canShoot = true; // player state on shooting
 	// players locations/direction
 	int currentRoomId;
 	int oldx, oldy;
-	Timer runcd = new Timer();
-	Timer slowing = new Timer();
-	Timer shootcd = new Timer();
-	//Movement direction
+	Timer shootcd = new Timer(200, this); // cooldown deafult 0.2 seconds (1000 = 1sec)
+	// Movement direction
 	public boolean pUP;
 	public boolean pDOWN;
 	public boolean pRIGHT;
 	public boolean pLEFT;
-	
+
 	// Direction of player shooting
 	public boolean fUP;
 	public boolean fDOWN;
@@ -42,10 +37,8 @@ public class Player extends Object {
 	public boolean fLEFT;
 
 	public String loc;
-
-	public face f = Player.face.LEFT;
-
-	public ArrayList<Bullet> bullet; // dynamic data structures
+	// dynamic data structures
+	public ArrayList<Bullet> bullet; // needed because no set amount of bullets
 
 	/**
 	 * constructor for player defines x, y, width, height loads image
@@ -66,54 +59,32 @@ public class Player extends Object {
 	}
 
 	/**
-	 * moves and changes changing direction (f)
+	 * moves and changes changing direction of bullet
 	 */
 	public void physic() {
-		oldx = x;
+		oldx = x; // for collsion
 		oldy = y;
+		// player movement
 		if (pUP) {
-			f = Player.face.UP;
 			up();
 		}
 		if (pDOWN) {
-			f = Player.face.DOWN;
 			down();
 		}
 		if (pLEFT) {
-			f = Player.face.LEFT;
 			left();
 		}
 		if (pRIGHT) {
-			f = Player.face.RIGHT;
 			right();
 		}
-		if (running) {
-			running();
-		}
-		if(cooldown){
-			if (fUP|| fDOWN||fRIGHT||fLEFT) {
+		// shooting if cooldown
+		if (canShoot) {
+			// if pressing and direction for wasd then fire(method)
+			if (fUP || fDOWN || fRIGHT || fLEFT) {
 				fire();
 			}
-			
+
 		}
-	
-	}
-
-	public void running() {
-		speed = runSpeed;
-		runcd.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				if (speed != 5) {
-					deacceleration();
-				}
-			}
-
-			private void deacceleration() {
-				speed -= 1;
-				System.out.println("slow");
-			}
-		}, 1000);
 
 	}
 
@@ -131,11 +102,11 @@ public class Player extends Object {
 	 * creates the bullet and adds to arraylist
 	 */
 	private void fire() {
-			bullet.add(new Bullet(this, getX(), getY(), 20, 20, this.fUP,
-					this.fDOWN, this.fLEFT, this.fRIGHT)); // Creates New
-			
-		
-	//	space = false; // reset space
+		bullet.add(new Bullet(this, getX(), getY(), 20, 20, this.fUP,
+				this.fDOWN, this.fLEFT, this.fRIGHT)); // Creates New bullet at
+														// player
+		shootcd.start(); // cooldowntimer start
+		canShoot = false; // cooldown var stop(unable to shoot)
 	}
 
 	/**
@@ -154,17 +125,14 @@ public class Player extends Object {
 	public int getY() {
 		return y;
 	}
-	public boolean direCheck() {
-		if(fUP == true || fDOWN == true ||fRIGHT == true||fLEFT == true){
-			return true;
-		}
-		return false;
 
-			
-		
-	}
 	public void actionPerformed(ActionEvent e) {
-		
+		if (e.getSource() == shootcd) {
+			// if timer is shootcd then allow the player to shoot
+			canShoot = true;
+			shootcd.stop(); // cooldowntimer stop
+		}
+
 	}
 
 	/**

@@ -2,14 +2,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 public class Block extends Object {
+	// single block properties
 	int id;
 	int wallID = 1;
 	int floorID = 0;
-    static int exitID = 2;
-    int spawner = 2;
+	static int exitID = 2;
+	int spawner = 2;
 	boolean passable;
-
-	// Image wallPic = imageLoad("Brick_white_wall.jpg");
 
 	public Block(int x, int y, int height, int width) {
 		// Block Constructor
@@ -19,12 +18,18 @@ public class Block extends Object {
 		this.width = width;
 	}
 
+	/**
+	 * draws block depending on id
+	 * 
+	 * @param g
+	 */
+
 	public void draw(Graphics g) {
 		// Background and walls
 		if (id == wallID) {
 			g.drawImage(BlcImages.wallPic, x, y, height, width, null);
 			passable = false;
-		} 
+		}
 		if (id == floorID) {
 			g.drawImage(BlcImages.floorPic, x, y, height, width, null);
 			passable = true;
@@ -34,6 +39,12 @@ public class Block extends Object {
 			passable = true;
 		}
 	}
+
+	/**
+	 * draw second layer of the block
+	 * 
+	 * @param g
+	 */
 
 	public void drawLayer2(Graphics g) {
 		// Object(Interactive Stuff)
