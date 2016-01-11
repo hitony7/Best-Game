@@ -14,6 +14,7 @@ public class Monster extends Object {
 	int speed = 2;
 	// to refer the screen
 	Screen screen;
+	int oldx, oldy;
 
 	public Monster(int x, int y, int width, int height, int type, Screen screen) {
 		this.x = x;
@@ -30,21 +31,28 @@ public class Monster extends Object {
 	 * monster
 	 */
 	public void move() {
+		oldx = x;
+		oldy = y;
 		int xtemp = this.x - screen.player.getX();
 		int ytemp = this.y - screen.player.getY();
 		if (xtemp < 0) { // if xdifferance is positive then move left
-			x += speed;
+			x += speed +ran();
 		}
 		if (xtemp > 0) { // (right)
-			x -= speed;
+			x -= speed+ran();
 		}
 		if (ytemp < 0) { // if ydifferance is positive then move down
-			y += speed;
+			y += speed+ran();
 		}
 		if (ytemp > 0) {// (up)
-			y -= speed;
+			y -= speed+ran();
 		}
+		y += ran();
 
+	}
+
+	public int ran() {
+		return (int) (Math.random() * (5 - (-5)) + (-5));
 	}
 
 	/**

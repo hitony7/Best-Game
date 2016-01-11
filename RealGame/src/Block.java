@@ -8,6 +8,7 @@ public class Block extends Object {
 	int floorID = 0;
 	static int exitID = 2;
 	int spawner = 2;
+	int shop = 1;
 	boolean passable;
 
 	public Block(int x, int y, int height, int width) {
@@ -50,6 +51,9 @@ public class Block extends Object {
 		// Object(Interactive Stuff)
 		if (id == spawner) {
 			g.drawImage(BlcImages.crack, x, y, height, width, null);
+		}
+		if (id == shop) {
+			g.drawImage(BlcImages.randShop, x, y, height, width, null);
 		}
 	}
 }

@@ -20,10 +20,12 @@ public class Player extends Object implements ActionListener {
 	public int runSpeed = 15;
 	BufferedImage image;
 	public boolean canShoot = true; // player state on shooting
+	public boolean interact = false;
 	// players locations/direction
 	int currentRoomId;
 	int oldx, oldy;
-	Timer shootcd = new Timer(200, this); // cooldown deafult 0.2 seconds (1000 = 1sec)
+	public int timecool = 200;
+	Timer shootcd = new Timer(timecool, this); // cooldown deafult 0.2 seconds (1000 = 1sec)
 	// Movement direction
 	public boolean pUP;
 	public boolean pDOWN;

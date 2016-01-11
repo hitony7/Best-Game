@@ -51,7 +51,7 @@ public class Spawner implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("newthing");
-		mobs.add(new Monster(550, 60, 100, 100, 1, screen));
+		mobs.add(new Monster(550, 80, 50, 50, 1, screen));
 
 	}
 
