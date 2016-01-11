@@ -26,7 +26,7 @@ public class Bullet extends Object {
 		this.DOWN = DOWN;
 		this.LEFT = LEFT;
 		this.RIGHT = RIGHT;
-		damage = 1;
+		damage = 5;
 		image = imageLoad("Bullet.png");
 	}
 

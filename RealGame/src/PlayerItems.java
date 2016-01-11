@@ -20,6 +20,8 @@ public class PlayerItems {
 	public int speedUp() {
 		return  player.speed + 1;
 	}
+	public void effectRand() {
+			 
 
-
+	}
 }

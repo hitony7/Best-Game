@@ -42,7 +42,6 @@ public class Object extends JLabel {
 	 */
 	public boolean collison(Object object2) {
 		// TODO refector 
-		//PS ANTHONY USE THIS IF YOU ARE JUST JLABELS (EXMAPLES IF YOU USE .SETLOCATION OR .SETBOUNDS)
 		//return this.getBounds().intersects(object2.getBounds());
 		
 		//TONY's OTHER THING

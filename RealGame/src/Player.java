@@ -39,6 +39,7 @@ public class Player extends Object implements ActionListener {
 	public boolean fLEFT;
 
 	public String loc;
+	public PlayerItems items; 
 	// dynamic data structures
 	public ArrayList<Bullet> bullet; // needed because no set amount of bullets
 
@@ -57,6 +58,7 @@ public class Player extends Object implements ActionListener {
 		width = 80;
 		speed = 5;
 		image = imageLoad("turtle.png");
+		items = new PlayerItems(this);
 		bullet = new ArrayList<Bullet>();
 	}
 

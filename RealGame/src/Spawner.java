@@ -24,7 +24,7 @@ public class Spawner implements ActionListener {
 
 	// spawner Constructor
 	public Spawner(Screen screen) {
-		spawninterval = new Timer(1000, this);
+		spawninterval = new Timer(5000, this);
 		spawninterval.start();
 		mobs = new ArrayList<Monster>();
 		this.screen = screen;
