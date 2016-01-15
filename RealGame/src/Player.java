@@ -21,6 +21,8 @@ public class Player extends Object implements ActionListener {
 	BufferedImage image;
 	public boolean canShoot = true; // player state on shooting
 	public boolean interact = false;
+	public int countsec = 0;
+	public int countmin = 0;
 	// players locations/direction
 	int currentRoomId;
 	int oldx, oldy;
@@ -41,6 +43,7 @@ public class Player extends Object implements ActionListener {
 	public String loc;
 	// dynamic data structures
 	public ArrayList<Bullet> bullet; // needed because no set amount of bullets
+	public boolean dead = false;
 
 	/**
 	 * constructor for player defines x, y, width, height loads image

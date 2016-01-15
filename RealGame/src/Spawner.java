@@ -24,7 +24,7 @@ public class Spawner implements ActionListener {
 
 	// spawner Constructor
 	public Spawner(Screen screen) {
-		spawninterval = new Timer(1000, this);
+		spawninterval = new Timer(3000, this);
 		spawninterval.start();
 		mobs = new ArrayList<Monster>();
 		this.screen = screen;
@@ -50,7 +50,6 @@ public class Spawner implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("newthing");
 		mobs.add(new Monster(550, 80, 50, 50, 1, screen));
 
 	}

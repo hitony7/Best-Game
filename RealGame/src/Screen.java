@@ -26,6 +26,8 @@ public class Screen extends JPanel implements Runnable {
 	public LevelLoad levelLoad;
 	public Spawner spawner;
 	public Hud hud;
+	public Highscore highscore = new Highscore(this);
+	public boolean reset = false;
 
 	/**
 	 * Screen constructor adds keylistener and sets the panel size equal the the
@@ -51,6 +53,10 @@ public class Screen extends JPanel implements Runnable {
 		if (spawner != null) {
 			// only draw if in right room and not null
 			spawner.draw(g, room.ID);
+		}
+
+		if (highscore.hide == false) {
+			highscore.draw(g);
 		}
 	}
 
@@ -126,7 +132,7 @@ public class Screen extends JPanel implements Runnable {
 			for (int i = 0; i < monster.size(); i++) {
 				if (monster.get(i).collison(player) && room.ID == "monster") {
 					player.health -= monster.get(i).damage;
-				//	monster.remove(i);
+					// monster.remove(i);
 				}
 			}
 			// monster and bullets
@@ -142,7 +148,7 @@ public class Screen extends JPanel implements Runnable {
 				}
 
 			}
-			//monster and walls
+			// monster and walls
 			for (int y = 0; y < room.blocks.length; y++) {
 				for (int x = 0; x < room.blocks[0].length; x++) {
 					for (int i = 0; i < monster.size(); i++) {
@@ -150,14 +156,14 @@ public class Screen extends JPanel implements Runnable {
 								&& room.blocks[y][x].passable == false) {
 							monster.get(i).x = monster.get(i).oldx;
 							monster.get(i).y = monster.get(i).oldy;
-		
+
 						}
 					}
 
 				}
 			}
 			// monster and monsters
-			if(true){
+			if (true) {
 				for (int i2 = 0; i2 < monster.size(); i2++) {
 					for (int i = 0; i < monster.size(); i++) {
 						if (monster.get(i).collison(monster.get(i2)) && i2 != i) {
@@ -169,7 +175,7 @@ public class Screen extends JPanel implements Runnable {
 						}
 					}
 				}
-				
+
 			}
 			checkHP(monster);
 		}
@@ -256,10 +262,15 @@ public class Screen extends JPanel implements Runnable {
 	 * @param monster
 	 */
 	private void checkHP(ArrayList<Monster> monster) {
+		if (player.health < 0 && !player.dead) {
+			highscore.add(player.countsec, player.name);
+			player.dead = true;
+
+		}
 		for (int i = 0; i < monster.size(); i++) {
 			if (monster.get(i).health <= 0) {
 				player.coin += monster.get(i).randCoin();
-				monster.remove(i);
+				 monster.remove(i);
 			}
 		}
 
@@ -278,7 +289,12 @@ public class Screen extends JPanel implements Runnable {
 				update(); // update
 				checkC(); // check collision
 				repaint(); // render
-
+				if(reset){
+					isFirst = true;
+					define();
+					spawnfirst = true;
+					reset = false;
+				}
 			}
 			try {
 				Thread.sleep(1000 / 60);// 1000/60 = 60fps

@@ -41,6 +41,12 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			screen.player.fLEFT = true;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_H) {
+			screen.highscore.hide = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			screen.reset = true;
+		}
 		// trouble shooting
 		if (e.getKeyCode() == KeyEvent.VK_E) {
 			for (int i = 0; i < screen.room.blocks.length; i++) {
@@ -82,6 +88,9 @@ public class KeyMove implements KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			screen.player.interact = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_H) {
+			screen.highscore.hide = true;
 		}
 
 	}
