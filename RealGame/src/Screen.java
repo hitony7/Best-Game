@@ -123,7 +123,7 @@ public class Screen extends JPanel implements Runnable {
 				if (player.collison(room.layer2[y][x])
 						&& room.layer2[y][x].id == 1 && player.interact && player.coin >= 10) {
 					player.coin -= 10;
-				    player.health = player.items.health10();
+				    player.items.effectRand();
 					
 				}
 			}
@@ -268,7 +268,7 @@ public class Screen extends JPanel implements Runnable {
 	/**
 	 * checks all monster health then remove hp > 0 ones. +coins are given to
 	 * player
-	 * 
+	 * Player health + highscore added
 	 * @param monster
 	 */
 	private void checkHP(ArrayList<Monster> monster) {
