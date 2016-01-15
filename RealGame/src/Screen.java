@@ -118,6 +118,16 @@ public class Screen extends JPanel implements Runnable {
 				}
 			}
 		}
+		for (int y = 0; y < room.layer2.length; y++) {
+			for (int x = 0; x < room.layer2[0].length; x++) {
+				if (player.collison(room.layer2[y][x])
+						&& room.layer2[y][x].id == 1 && player.interact && player.coin >= 10) {
+					player.coin -= 10;
+				    player.health = player.items.health10();
+					
+				}
+			}
+		}
 	}
 
 	/**

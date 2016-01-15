@@ -36,7 +36,7 @@ public class Monster extends Object {
 		int xtemp = this.x - screen.player.getX();
 		int ytemp = this.y - screen.player.getY();
 		if (xtemp < 0) { // if xdifferance is positive then move left
-			x += speed +ran();
+			x += speed+ran();
 		}
 		if (xtemp > 0) { // (right)
 			x -= speed+ran();

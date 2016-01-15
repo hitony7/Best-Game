@@ -12,7 +12,7 @@ public class KeyMove implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		//
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_Q) {
 			screen.player.interact = true;
 		}
 		// Player move direction
@@ -86,7 +86,7 @@ public class KeyMove implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			screen.player.fLEFT = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_Q) {
 			screen.player.interact = false;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_H) {
